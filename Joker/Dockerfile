@@ -15,4 +15,6 @@ COPY --from=build-env /Joker/out .
 
 ENV ASPNETCORE_URLS http://+:80
 
+EXPOSE 80/tcp
+
 ENTRYPOINT ["dotnet", "Joker.dll"]
