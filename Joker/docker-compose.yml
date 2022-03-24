@@ -3,27 +3,19 @@ version: '3.7'
 services:
 
   web:
-    container_name: 'aspnetcoreapp'
-    image: 'aspnetcoreapp'
-    build:
-      context: .
-      dockerfile: aspnetcore.dockerfile
+    build: .
     ports:
-     - "5000:5000"
+     - "5001:80"
     depends_on:
      - "postgres"
-    networks:
-      - aspnetcoreapp-network
 
   postgres:
     container_name: 'postgres'
     image: postgres
+    ports:
+      - "5432:5432"
     environment:
       # change this for a "real" app!
-      POSTGRES_PASSWORD: password
-    networks:
-      - aspnetcoreapp-network
-
-networks:
-  aspnetcoreapp-network:
-    driver: bridge
+      POSTGRES_PASSWORD: mysecretpasswordgit
+    volumes:
+      - ./data:/var/lib/postgresql/data1
